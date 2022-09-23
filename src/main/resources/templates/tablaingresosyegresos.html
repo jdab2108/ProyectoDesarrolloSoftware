@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestion - Movimientos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/stylefrm.css}">
+    <link rel="stylesheet" th:href="@{/css/styletable.css}">
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
+
+    <!--For Small Screen
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">-->
+    <script src="https://kit.fontawesome.com/44a245e4f0.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">Ingresos y egresos</a></li>
+                    <li><a href="">Usuarios</a></li>
+                    <li><a href="">Empresas</a></li>
+                </ul>
+
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Sistema de Gestión</h1>
+            <p>Conoce nuestro sistema de gestión</p>
+            <a href="" class="link-conocenos">Conocenos</a>
+        </div>
+    </section>
+
+    <!--Tabla-->
+<section class="formulario">
+    <div class="container">
+        <div class="title" ><h2>Registro de movimientos</h2></div>
+        <input class="boton" type="submit" value="Nuevo movimiento">
+    <div class="tabla">
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>codigo</th>
+                <th>montoMovimiento</th>
+                <th>conceptoMovimiento</th>
+                <th>empleado</th>
+                <th>empresa</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="i:${MovimientoDinero}">
+                <td th:text="${i.codigo}"></td>
+                <td th:text="${i.montoMovimiento}"></td>
+                <td th:text="${i.conceptoMovimiento}"></td>
+                <td th:text="${i.empleado}"></td>
+                <td th:text="${i.empresa}"></td>
+                <td><a th:href="@{'MovimientoDinero/actualizar'+'/'+${i.codigo}}">Consultar</a></td>
+                <td><a th:href="@{'MovimientoDinero/eliminar'+'/'+${i.codigo}}">Eliminar</a></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+    <input class="boton" type="submit" value="Total">   
+    </div> 
+    </div>
+</section>
+
+<!--JavaScript Show or hide menu-->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-220px";
+    }
+</script>
+
+</body>
+</html>

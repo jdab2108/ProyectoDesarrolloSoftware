@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/stylefrm.css}">
+    <title>Sistema de Gestion - Usuarios</title>
+
+
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
+
+    <!--For Small Screen
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.2/css/fontawesome.min.css">-->
+    <script src="https://kit.fontawesome.com/44a245e4f0.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.png" alt=""></a>
+            <div class="nav-links" id="navLinks">
+                <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="">Ingresos y egresos</a></li>
+                    <li><a href="">Usuarios</a></li>
+                    <li><a href="">Empresas</a></li>
+                </ul>
+
+            </div>
+            <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Sistema de Gestión</h1>
+            <p>Conoce nuestro sistema de gestión</p>
+            <a href="" class="link-conocenos">Conocenos</a>
+        </div>
+    </section>
+
+    <!--Formulario-->
+<section class="formulario">
+    <div class="container">
+        <div class="title" >Registro de usuarios</div>
+
+        <form th:action="@{/Empleado/guardar}" th:object="${empleadoinsertar}"method="POST" class="frm">
+            <div class="user-details">
+
+                <div class="input-box">
+                    <span class="details">Documento Empleado</span>
+                    <input type="text" placeholder="Ingrese el documento" id="documento" required th:field="*{documentoEmpleado}">
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Nombre Empleado</span>
+                    <input type="text" placeholder="Ingrese el nombre" id="nombre" required th:field="*{nombreEmpleado}">
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Correo Empleado</span>
+                    <input type="email" placeholder="Ingrese el correo" id="correo" required th:field="*{correoEmpleado}">
+                </div>
+                <div class="input-box">
+                    <span class="details">Rol Empleado</span>
+                    <input type="text" placeholder="Ingrese el rol" id="rol" required th:field="*{rolEmpleado}">
+                </div>
+                <div class="input-box">
+                    <span class="details">Nit</span>
+                    <input type="text" placeholder="Ingrese el nit empresa" id="nit" required th:field="*{nit}">
+                </div>
+            </div>
+
+            <div class="boton">
+                <input type="submit" value="Registrar">
+            </div>
+            
+        </form>
+            
+    </div>
+</section>
+
+<!--JavaScript Show or hide menu-->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu(){
+        navLinks.style.right = "0";
+    }
+    function hideMenu(){
+        navLinks.style.right = "-220px";
+    }
+</script>
+
+</body>
+</html>
