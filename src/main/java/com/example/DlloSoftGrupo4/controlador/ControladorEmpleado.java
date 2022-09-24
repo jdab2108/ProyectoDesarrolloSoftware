@@ -2,8 +2,13 @@ package com.example.DlloSoftGrupo4.controlador;
 
 
 import com.example.DlloSoftGrupo4.entidades.Empleado;
+import com.example.DlloSoftGrupo4.entidades.Usuario;
 import com.example.DlloSoftGrupo4.servicios.ServicioEmpleado;
+import com.example.DlloSoftGrupo4.servicios.ServicioUsuario;
+import com.example.DlloSoftGrupo4.servicios.ServiciosImpEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +26,9 @@ public class ControladorEmpleado {
 
     @Autowired
     private ServicioEmpleado empl;
+
+    @Autowired
+    private ServicioUsuario servicioUsuario;
 
 //   @GetMapping
 //  public List<Empleado> listar()  {
@@ -105,6 +113,20 @@ public class ControladorEmpleado {
         return ("redirect:/Empleado");
     }
 
+    public ControladorEmpleado(ServicioUsuario servicioUsuario) {
+        this.servicioUsuario = servicioUsuario;
+    }
+
+    @GetMapping("/")
+    public String inicio(Model model, @AuthenticationPrincipal OidcUser principal) {
+       if(principal !=null) {
+
+           Usuario usuario=this.servicioUsuario.obtenerUsuario(principal.getClaims());
+           System.out.print(principal.getClaims());
+           model.addAttribute("usuario",usuario);
+       }
+        return "index";
+    }
 
 
 }
