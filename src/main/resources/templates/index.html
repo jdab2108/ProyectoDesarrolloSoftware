@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,14 @@
     <script src="https://kit.fontawesome.com/44a245e4f0.js" crossorigin="anonymous"></script>
 
 </head>
+
+<div sec:authorize="!isAuthenticated()">
+    <a th:href="@{/oauth2/authorization/auth0}">Log In</a>
+</div>
+
+<div sec:authorize="!isAuthenticated()">
+    <a th:href="@{/Empleado}">Autenticar</a>
+</div>
 
 <body>
     <section class="header">
